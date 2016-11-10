@@ -10,7 +10,7 @@ const Title = ({todoCount}) => {
     </div>);
 };
 
-const TodoForm = ({addTodo}) => {
+const TodoForm = ({addTodo, invalidInput, onChangeText}) => {
   // Input Tracker
   let input;
   // Return JSX
@@ -20,9 +20,11 @@ const TodoForm = ({addTodo}) => {
         addTodo(input.value);
         input.value = '';
       }}>
-      <input className="form-control col-md-12" ref={node => {
-        input = node;
-      }} />
+      <div className={invalidInput ? "has-error" : ""}>
+        <input onChange={onChangeText} className="form-control col-md-12" ref={node => {
+          input = node;
+        }} />
+      </div>
       <br />
     </form>
   );
@@ -50,6 +52,9 @@ class TodoApp extends Component {
   constructor(props){
     // Pass props to parent class
     super(props);
+    this.addTodo = this.addTodo.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
     // Set initial state
     this.state = {
       todos: [{ text: 'Test', id: 0 }], idCounter: 1
@@ -58,9 +63,15 @@ class TodoApp extends Component {
 
   // Add todo handler
   addTodo(val){
+    if (!val) {
+      this.setState({ invalidInput: true });
+      return;
+    }
+
     // Assemble data
     const todo = { text: val, id: this.state.idCounter }
     const newTodos = this.state.todos;
+
     newTodos.push(todo);
     // Update data
     this.setState({ todos: newTodos, idCounter: this.state.idCounter + 1 });
@@ -75,15 +86,23 @@ class TodoApp extends Component {
     this.setState({ todos: remainder });
   }
 
+  onChangeText(text){
+    this.setState({invalidInput: false})
+  }
+
   render(){
     // Render JSX
     return (
       <div>
         <Title todoCount={this.state.todos.length}/>
-        <TodoForm addTodo={this.addTodo.bind(this)}/>
+        <TodoForm
+          invalidInput={this.state.invalidInput}
+          addTodo={this.addTodo}
+          onChangeText={this.onChangeText}
+        />
         <TodoList
           todos={ this.state.todos }
-          remove={this.handleRemove.bind(this)}
+          remove={this.handleRemove}
         />
       </div>
     );

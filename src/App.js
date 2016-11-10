@@ -20,7 +20,7 @@ const TodoForm = ({addTodo}) => {
         addTodo(input.value);
         input.value = '';
       }}>
-      <input className="form-control col-md-12" ref={node => {
+      <input className="form-control col-md-4" ref={node => {
         input = node;
       }} />
       <br />

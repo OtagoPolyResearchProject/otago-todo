@@ -3,9 +3,9 @@ import './App.css';
 
 
 const Title = ({todoCount}) => {
-  return (<div>
+  return (<div className="col-md-6 col-md-offset-3 styling1">
        <div>
-          <h1>to-do ({todoCount})</h1>
+          <h1>Fishery Project To-dos({todoCount})</h1>
        </div>
     </div>);
 };
@@ -15,23 +15,23 @@ const TodoForm = ({addTodo}) => {
   let input;
   // Return JSX
   return (
-    <form onSubmit={(e) => {
+    <div className="col-md-6 col-md-offset-3"><form onSubmit={(e) => {
         e.preventDefault();
         addTodo(input.value);
         input.value = '';
       }}>
-      <input className="form-control col-md-4 input-color" ref={node => {
+        <div className="styling"> Enter your todos below : <input className="form-control col-md-4 input-options style2 " ref={node => {
         input = node;
-      }} />
+        }} /></div>
       <br />
-    </form>
+    </form></div>
   );
 };
 
 const Todo = ({todo, remove}) => {
   // Each Todo
-  return (<div href="#" className="list-group-item" >
-    {todo.text}<button onClick={() => {remove(todo.id)}}>Delete</button>
+  return (<div href="#" className="list-group-item col-md-6 col-md-offset-3" >
+    {todo.text}<button className="style1" onClick={() => {remove(todo.id)}}>Delete</button>
   </div>);
 }
 

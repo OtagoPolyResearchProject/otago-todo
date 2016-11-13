@@ -5,7 +5,7 @@ import './App.css';
 const Title = ({todoCount}) => {
   return (<div>
        <div>
-          <h1>to-do ({todoCount})</h1>
+          <h2 className="heading">To-Do ({todoCount})</h2>
        </div>
     </div>);
 };
@@ -21,7 +21,7 @@ const TodoForm = ({addTodo, invalidInput, onChangeText}) => {
         input.value = '';
       }}>
       <div className={invalidInput ? "has-error" : ""}>
-        <input onChange={onChangeText} className="form-control col-md-4 input-color" ref={node => {
+        <input onChange={onChangeText} className="form-control col-md-12 input-color" ref={node => {
           input = node;
         }} />
       </div>
@@ -32,9 +32,9 @@ const TodoForm = ({addTodo, invalidInput, onChangeText}) => {
 
 const Todo = ({todo, remove}) => {
   // Each Todo
-  return (<div href="#" className="list-group-item" >
-    {todo.text}<button onClick={() => {remove(todo.id)}}>Delete</button>
-  </div>);
+  return (<div className="row spacing1" >
+    <div className="col-xs-9"><div className="blocking1">{todo.text}</div></div><div className="col-xs-2 spacing2"> <button className="btn btn-default" onClick={() => {remove(todo.id)}}>X</button>
+  </div></div>);
 }
 
 const TodoList = ({todos, remove}) => {

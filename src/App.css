@@ -2,3 +2,19 @@
 .input-color{
   background: #f5f5f5
 }
+.heading {
+  padding:10px;
+  border: 2px solid purple;
+}
+
+.blocking1 {
+  padding:5px;
+  border: 2px solid purple;
+  vertical-align: middle;
+}
+.spacing2 {
+  float:right;
+}
+.spacing1 {
+  margin:5px;
+}
